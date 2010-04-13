@@ -1,0 +1,16 @@
+<h1>SecurityTest#index</h1>
+<br/>
+
+<%for each_run in @rbp_run_hash.keys %>
+  <table border="1">
+    <tr>
+      <td>Run : <%=each_run%> &nbsp;&nbsp; Total errors: <%=@rbp_run_hash[each_run].length%>
+    </tr>
+    <%for each_err in @rbp_run_hash[each_run]%>
+      <tr>
+        <td><%=each_err%>
+      </tr>
+    <%end%>
+  </table>
+<%end%>
+

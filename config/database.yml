@@ -1,0 +1,8 @@
+development:
+  adapter: mysql
+  database: sample_appsmob
+  username: root
+  password: 
+  host: localhost
+  pool: 5
+  timeout: 5000
