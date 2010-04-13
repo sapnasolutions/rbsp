@@ -47,7 +47,6 @@ module RailsBestPractices
 
       def evaluate_node_start(node)
         evaluate_node(:start, node)
-        $log.info "----------------Start1"
         evaluate_start(node)
       end
   

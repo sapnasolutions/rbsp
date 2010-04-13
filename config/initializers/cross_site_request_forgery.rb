@@ -20,8 +20,25 @@ module RailsBestPractices
 
       private
       def csrf?(node)
-        node.grep_nodes({:node_type => :call}).collect{|i| i[2]}.include? :protect_from_forgery
+        ret_val = nil
+        if node.subject.to_s == "ApplicationController"
+          ret_val = node.grep_nodes({:node_type => :call}).collect{|i| i.message}.include? :protect_from_forgery
+        else
+          ret_val = check_skip_in_child(node)
+        end
+        return ret_val
       end
+
+      def check_skip_in_child(node)
+        child_nodes = node.grep_nodes({:node_type => :call}).select{|i| i.message==:skip_before_filter}
+        child_arg_list = child_nodes[0].grep_nodes({:node_type => :arglist})[0].grep_nodes({:node_type => :lit}).collect{|i| i[1]}
+        if(child_arg_list.blank?)
+          return true
+        else
+          return (child_arg_list.include? :verify_authenticity_token) ? false : true
+        end
+      end
+      
     end
   end
 end
