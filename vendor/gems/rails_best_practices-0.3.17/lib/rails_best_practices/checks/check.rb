@@ -6,7 +6,7 @@ $log = Logger.new("#{RAILS_ROOT}/log/development.log")
 module RailsBestPractices
   module Checks
     class Check
-      NODE_TYPES = [:call, :defn, :defs, :if, :unless, :class, :lasgn, :ivar]
+      NODE_TYPES = [:call, :defn, :defs, :if, :unless, :class, :lasgn, :ivar, :attrasgn]
       
       CONTROLLER_FILES = /_controller.rb$/
       MIGRATION_FILES = /db\/migrate\/.*rb/
