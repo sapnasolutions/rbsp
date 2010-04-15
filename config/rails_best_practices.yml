@@ -1,4 +1,4 @@
 
 #CrossSiteRequestForgery: { }
 #AlwaysAddDbIndexCheck: { }
-MassAssignment: { }
+ParanoidMassAssignmentCheck: { }
