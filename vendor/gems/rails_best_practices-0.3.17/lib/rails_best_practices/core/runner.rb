@@ -6,6 +6,8 @@ require 'yaml'
 module RailsBestPractices
   module Core
     class Runner
+      include Observable
+      
       DEFAULT_CONFIG = File.join(File.dirname(__FILE__), "..", "..", "..", "rails_best_practices.yml")
       CUSTOM_CONFIG = File.join('config', 'rails_best_practices.yml')
       
@@ -44,6 +46,8 @@ module RailsBestPractices
       end
 
       def check_file(filename)
+        changed
+        notify_observers(filename)
         check(filename, File.read(filename))
       end
 
@@ -70,7 +74,9 @@ module RailsBestPractices
         checks = YAML.load_file @config
         checks.each do |check| 
           klass = eval("RailsBestPractices::Checks::#{check[0]}")
-          check_objects << (check[1].empty? ? klass.new : klass.new(check[1]))
+          klass_obj = (check[1].empty? ? klass.new : klass.new(check[1]))
+          check_objects << klass_obj
+          self.add_observer(klass_obj)
         end
         check_objects
       end

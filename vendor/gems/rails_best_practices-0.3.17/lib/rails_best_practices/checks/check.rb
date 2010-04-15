@@ -64,6 +64,9 @@ module RailsBestPractices
       def errors
         @errors
       end
+
+      def update(filename)
+      end
     end
   end
 end
