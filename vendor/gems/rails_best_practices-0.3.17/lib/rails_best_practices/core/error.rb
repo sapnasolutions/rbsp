@@ -10,7 +10,11 @@ module RailsBestPractices
       end
       
       def to_s
-        "#{@filename}:#{@line_number} - #{@message}"
+        unless @filename.blank?
+          "#{@filename}:#{@line_number} - #{@message}"
+        else
+          "#{@message}"
+        end
       end
     end
   end

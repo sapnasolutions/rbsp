@@ -25,41 +25,59 @@ module RailsBestPractices
       def interesting_files
         INITIALIZER_FILES
       end
+
+      #This method will be required if the app is run as a web ap. If it is a gem and the checks are run once per execution,
+      #then remove this method.
+      #TODO Remove method when gemmed.
+      def self.reinitialize
+        @@paranoid_check = false
+        @@temp_initializer_files = @@interested_initializer_files.dup
+      end
       
       def initialize
         super
-        @paranoid_check = false
-         @interested_initializer_files = @@interested_initializer_files.dup
+        @@paranoid_check = false
+        @@temp_initializer_files = @@interested_initializer_files.dup
       end
 
       def evaluate_start(node)
-        mass_assignment_proof?(node)
+        paranoid_assignment_check(node) unless @@paranoid_check
       end
 
       def update(filename)
-        @interested_initializer_files.delete(filename)
-        if !paranoid_check? && @interested_initializer_files.blank?
-          $log.debug("=================== paranoid_check? : #{paranoid_check?} and @@interested_file: #{@interested_initializer_files.inspect}")
-          add_error "Mass assignment vulnerability. Please check: http://guides.rubyonrails.org/security.html#mass-assignment"
-          @paranoid_check = true
-          @interested_initializer_files = @@interested_initializer_files.dup
+        @@temp_initializer_files.delete(filename)
+        model_files_hash = MassAssignmentCheck.model_files_hash
+        if(!@@paranoid_check && @@temp_initializer_files.blank? && !model_files_hash.keys.blank?)
+          model_files_prone_to_attack = []
+          model_files_hash.each {|key, value| value==false ? (model_files_prone_to_attack << key) : nil}
+          model_files_prone_to_attack.compact!
+          model_files_prone_to_attack.each{|model_file|
+            add_error "Mass assignment vulnerability for model: #{model_file} Please check: http://guides.rubyonrails.org/security.html#mass-assignment"
+          }
+          ParanoidMassAssignmentCheck.reinitialize
+          MassAssignmentCheck.reinitialize
         end
+      end
+
+      def add_error(error, file = nil, line = nil)
+        @errors << RailsBestPractices::Core::Error.new("", "", error)
+      end
+
+      def self.paranoid_check?
+        @@paranoid_check
+      end
+
+      def self.paranoid_check=(state=false)
+        @@paranoid_check = state
       end
 
       private
-      def mass_assignment_proof?(node)
-        paranoid_assignment(node)
-      end
 
-      def paranoid_assignment(node)
+      def paranoid_assignment_check(node)
         if(node.message == :send)
           cn = node.grep_nodes({:node_type => :lit}).collect{|i| i[1]}
-          @paranoid_check = cn.include? :attr_accessible unless @paranoid_check
+          @@paranoid_check = cn.include? :attr_accessible unless @@paranoid_check
         end
-      end
-
-      def paranoid_check?
-        @paranoid_check
       end
 
     end
