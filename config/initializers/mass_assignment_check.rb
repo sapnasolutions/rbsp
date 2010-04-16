@@ -5,7 +5,7 @@ $log = Logger.new("#{RAILS_ROOT}/log/development.log")
 module RailsBestPractices
   module Checks
     
-    class ParanoidMassAssignmentCheck < Check
+    class MassAssignmentCheck < Check
       INITIALIZER_FILES = /config\/initializers\/.*rb/
 
       @@interested_initializer_files = "./config/initializers/".map { |p|
@@ -76,7 +76,7 @@ module RailsBestPractices
           model_files_prone_to_attack.each{|model_file|
             add_error "Mass assignment vulnerability for model: #{model_file} Please check: http://guides.rubyonrails.org/security.html#mass-assignment"
           }
-          ParanoidMassAssignmentCheck.reinitialize
+          MassAssignmentCheck.reinitialize
         end
       end
 
