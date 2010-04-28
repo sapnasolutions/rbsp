@@ -3,3 +3,5 @@
 CrossSiteRequestForgeryCheck: { }
 MassAssignmentCheck: { }
 FilterParameterLoggingCheck: { }
+
+SessionFixationCheck: { }
