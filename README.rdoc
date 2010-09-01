@@ -1,0 +1,11 @@
+= Sapna Best Practices
+
+Rails gem built on top of rails best practices, to include a whole bunch of web app security checks
+
+== Install
+
+  gem install sapna-best-practices
+  
+== Usage
+
+  In it's most basic form: sapna_best_practices rails_wep_app_of_your_choice 
