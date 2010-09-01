@@ -12,7 +12,7 @@ module SapnaBestPractices
         def interesting_tags
           [/eval/]
         end
-      
+        
       end
     end
   end

@@ -24,6 +24,7 @@ single:
   # SapnaBestPractices::Checks::CrossSiteRequestForgeryCheck: { }
   # SapnaBestPractices::Checks::AttrProtectedCheck: {}
   # SapnaBestPractices::Checks::VisualAttrAccessibleCheck: {}
+  SapnaBestPractices::Checks::EvalCheck: {}
 
 grouped:
   # SapnaBestPractices::Checks::Grouped::FilterParameterLoggingCheck: { }
@@ -34,4 +35,4 @@ grouped:
 file_parse:
   # SapnaBestPractices::Checks::FileParse::ErbScriptingAttackCheck: {}
   # SapnaBestPractices::Checks::FileParse::VisualActiveRecordFindersCheck: { }
-  SapnaBestPractices::Checks::FileParse::EvalCheck: { }
+  # SapnaBestPractices::Checks::FileParse::EvalCheck: { }

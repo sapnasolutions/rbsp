@@ -47,6 +47,6 @@ runners.map { |runner|
   infos_size += runner.infos.size 
 }
 puts "\nFound #{errors_size} error messages" if errors_size > 0
-puts "Found #{infos_size} information messages" if infos_size > 0
+puts "\nFound #{infos_size} information messages" if infos_size > 0
 
 exit errors_size
