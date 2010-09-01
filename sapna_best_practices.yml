@@ -26,10 +26,10 @@ single:
   # SapnaBestPractices::Checks::VisualAttrAccessibleCheck: {}
 
 grouped:
-  SapnaBestPractices::Checks::Grouped::FilterParameterLoggingCheck: { }
-  SapnaBestPractices::Checks::Grouped::SessionResetCheck: { }
-  SapnaBestPractices::Checks::Grouped::DisableMassAssignmentByDefaultCheck: { }
-  SapnaBestPractices::Checks::Grouped::ForgeryProtectionInTestCheck: { inversed: true }
+  # SapnaBestPractices::Checks::Grouped::FilterParameterLoggingCheck: { }
+  # SapnaBestPractices::Checks::Grouped::SessionResetCheck: { }
+  # SapnaBestPractices::Checks::Grouped::DisableMassAssignmentByDefaultCheck: { }
+  # SapnaBestPractices::Checks::Grouped::ForgeryProtectionInTestCheck: { inversed: true }
   
 file_parse:
-  # SapnaBestPractices::Checks::FileParse::ErbScriptingAttackCheck: {}
+  SapnaBestPractices::Checks::FileParse::ErbScriptingAttackCheck: {}

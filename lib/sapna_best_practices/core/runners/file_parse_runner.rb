@@ -5,14 +5,6 @@ module SapnaBestPractices
     module Runners
       class FileParseRunner < SapnaBestPractices::Core::Runners::Runner
 
-        def initialize(yaml_prefix, *checks)
-          super
-          # @config = File.exists?(CUSTOM_CONFIG) ? CUSTOM_CONFIG : DEFAULT_CONFIG
-          # @checks = checks unless checks.empty?
-          # @checks ||= load_checks(yaml_prefix)
-          @checker = SapnaBestPractices::Core::FileParseCheckingVisitor.new(@checks)
-        end
-      
       # private
     
         # def load_checks

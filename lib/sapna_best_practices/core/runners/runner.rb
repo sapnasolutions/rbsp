@@ -1,4 +1,5 @@
 require 'rails_best_practices/core/checking_visitor'
+require 'sapna_best_practices/core/file_parse_checking_visitor'
 
 module SapnaBestPractices
   module Core
@@ -14,8 +15,19 @@ module SapnaBestPractices
           @config = File.exists?(CUSTOM_CONFIG) ? CUSTOM_CONFIG : DEFAULT_CONFIG
           @checks = checks unless checks.empty?
           @checks ||= load_checks(yaml_prefix)
-          @checker ||= RailsBestPractices::Core::CheckingVisitor.new(@checks)
+          @checker ||= load_visitor(yaml_prefix)
           @debug = false
+        end
+        
+        def load_visitor(yaml_prefix)
+          case yaml_prefix.to_sym
+          when :single
+            RailsBestPractices::Core::CheckingVisitor.new(@checks)
+          when :grouped
+            RailsBestPractices::Core::CheckingVisitor.new(@checks)
+          when :file_parse
+            SapnaBestPractices::Core::FileParseCheckingVisitor.new(@checks)
+          end
         end
       
         # infos only exist on sapna best practices checks
@@ -49,7 +61,7 @@ module SapnaBestPractices
         def load_checks(yaml_prefix)
           check_objects = []
           checks = YAML.load_file @config          
-          checks[yaml_prefix.to_s].each do |check| 
+          checks[yaml_prefix.to_s].each do |check|       
             klass = eval("#{check[0]}")          
             # check_objects << (check[1].empty? ? klass.new : klass.new(check[1])) 
           
