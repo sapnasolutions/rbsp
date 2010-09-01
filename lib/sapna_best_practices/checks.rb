@@ -6,6 +6,7 @@ require 'sapna_best_practices/checks/visual_attr_accessible_check'
 
 require 'sapna_best_practices/checks/file_parse/erb_scripting_attack_check'
 require 'sapna_best_practices/checks/file_parse/visual_active_record_finders_check'
+require 'sapna_best_practices/checks/file_parse/eval_check'
 
 require 'sapna_best_practices/checks/grouped/filter_parameter_logging_check'
 require 'sapna_best_practices/checks/grouped/session_reset_check'

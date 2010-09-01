@@ -32,7 +32,7 @@ module SapnaBestPractices
             while (line = f.gets)
               line_count = line_count + 1
               self.interesting_tags.each do |tag_regexp|
-                add_error(error_message, file, line_count) if ((line =~ tag_regexp) >= 0)
+                add_info(error_message, file, line_count) if ((line =~ tag_regexp) >= 0)
               end
             end
           end

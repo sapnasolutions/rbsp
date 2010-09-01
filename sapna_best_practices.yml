@@ -33,4 +33,5 @@ grouped:
   
 file_parse:
   # SapnaBestPractices::Checks::FileParse::ErbScriptingAttackCheck: {}
-  SapnaBestPractices::Checks::FileParse::VisualActiveRecordFindersCheck: { }
+  # SapnaBestPractices::Checks::FileParse::VisualActiveRecordFindersCheck: { }
+  SapnaBestPractices::Checks::FileParse::EvalCheck: { }
