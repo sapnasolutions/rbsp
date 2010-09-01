@@ -1,0 +1,12 @@
+require 'sapna_best_practices/checks/visual_active_record_finders_check'
+require 'sapna_best_practices/checks/visual_named_scope_conditions_check'
+require 'sapna_best_practices/checks/cross_site_request_forgery_check'
+require 'sapna_best_practices/checks/attr_protected_check'
+require 'sapna_best_practices/checks/visual_attr_accessible_check'
+require 'sapna_best_practices/checks/file_parse/erb_scripting_attack_check'
+
+
+require 'sapna_best_practices/checks/grouped/filter_parameter_logging_check'
+require 'sapna_best_practices/checks/grouped/session_reset_check'
+require 'sapna_best_practices/checks/grouped/disable_mass_assignment_by_default_check'
+require 'sapna_best_practices/checks/grouped/forgery_protection_in_test_check'
