@@ -1,35 +1,35 @@
 single:
-  # RailsBestPractices::Checks::MoveFinderToNamedScopeCheck: { }
-  # RailsBestPractices::Checks::UseModelAssociationCheck: { }
-  # RailsBestPractices::Checks::UseScopeAccessCheck: { }
-  # RailsBestPractices::Checks::AddModelVirtualAttributeCheck: { }
-  # RailsBestPractices::Checks::ReplaceComplexCreationWithFactoryMethodCheck: { attribute_assignment_count: 2 }
-  # RailsBestPractices::Checks::MoveModelLogicIntoModelCheck: { called_count: 4 }
-  # RailsBestPractices::Checks::OveruseRouteCustomizationsCheck: { customize_count: 3 }
-  # RailsBestPractices::Checks::NeedlessDeepNestingCheck: { nested_count: 2 }
-  # RailsBestPractices::Checks::NotUseDefaultRouteCheck: {  }
-  # RailsBestPractices::Checks::KeepFindersOnTheirOwnModelCheck: { }
-  # RailsBestPractices::Checks::LawOfDemeterCheck: { }
-  # RailsBestPractices::Checks::UseObserverCheck: { }
-  # RailsBestPractices::Checks::IsolateSeedDataCheck: { }
-  # RailsBestPractices::Checks::AlwaysAddDbIndexCheck: { }
-  # RailsBestPractices::Checks::UseBeforeFilterCheck: { }
-  # RailsBestPractices::Checks::MoveCodeIntoControllerCheck: { }
-  # RailsBestPractices::Checks::MoveCodeIntoModelCheck: { }
-  # RailsBestPractices::Checks::MoveCodeIntoHelperCheck: { array_count: 3 }
-  # RailsBestPractices::Checks::ReplaceInstanceVariableWithLocalVariableCheck: { }
+  RailsBestPractices::Checks::MoveFinderToNamedScopeCheck: { }
+  RailsBestPractices::Checks::UseModelAssociationCheck: { }
+  RailsBestPractices::Checks::UseScopeAccessCheck: { }
+  RailsBestPractices::Checks::AddModelVirtualAttributeCheck: { }
+  RailsBestPractices::Checks::ReplaceComplexCreationWithFactoryMethodCheck: { attribute_assignment_count: 2 }
+  RailsBestPractices::Checks::MoveModelLogicIntoModelCheck: { called_count: 4 }
+  RailsBestPractices::Checks::OveruseRouteCustomizationsCheck: { customize_count: 3 }
+  RailsBestPractices::Checks::NeedlessDeepNestingCheck: { nested_count: 2 }
+  RailsBestPractices::Checks::NotUseDefaultRouteCheck: {  }
+  RailsBestPractices::Checks::KeepFindersOnTheirOwnModelCheck: { }
+  RailsBestPractices::Checks::LawOfDemeterCheck: { }
+  RailsBestPractices::Checks::UseObserverCheck: { }
+  RailsBestPractices::Checks::IsolateSeedDataCheck: { }
+  RailsBestPractices::Checks::AlwaysAddDbIndexCheck: { }
+  RailsBestPractices::Checks::UseBeforeFilterCheck: { }
+  RailsBestPractices::Checks::MoveCodeIntoControllerCheck: { }
+  RailsBestPractices::Checks::MoveCodeIntoModelCheck: { }
+  RailsBestPractices::Checks::MoveCodeIntoHelperCheck: { array_count: 3 }
+  RailsBestPractices::Checks::ReplaceInstanceVariableWithLocalVariableCheck: { }
   
-  # SapnaBestPractices::Checks::VisualActiveRecordFindersCheck: { }
-  # SapnaBestPractices::Checks::VisualNamedScopeConditionsCheck: { }
-  # SapnaBestPractices::Checks::CrossSiteRequestForgeryCheck: { }
-  # SapnaBestPractices::Checks::AttrProtectedCheck: {}
-  # SapnaBestPractices::Checks::VisualAttrAccessibleCheck: {}
+  SapnaBestPractices::Checks::VisualActiveRecordFindersCheck: { }
+  SapnaBestPractices::Checks::VisualNamedScopeConditionsCheck: { }
+  SapnaBestPractices::Checks::CrossSiteRequestForgeryCheck: { }
+  SapnaBestPractices::Checks::AttrProtectedCheck: {}
+  SapnaBestPractices::Checks::VisualAttrAccessibleCheck: {}
 
 grouped:
-  # SapnaBestPractices::Checks::Grouped::FilterParameterLoggingCheck: { }
-  # SapnaBestPractices::Checks::Grouped::SessionResetCheck: { }
-  # SapnaBestPractices::Checks::Grouped::DisableMassAssignmentByDefaultCheck: { }
-  # SapnaBestPractices::Checks::Grouped::ForgeryProtectionInTestCheck: { inversed: true }
+  SapnaBestPractices::Checks::Grouped::FilterParameterLoggingCheck: { }
+  SapnaBestPractices::Checks::Grouped::SessionResetCheck: { }
+  SapnaBestPractices::Checks::Grouped::DisableMassAssignmentByDefaultCheck: { }
+  SapnaBestPractices::Checks::Grouped::ForgeryProtectionInTestCheck: { inversed: true }
   
 file_parse:
   SapnaBestPractices::Checks::FileParse::ErbScriptingAttackCheck: {}

@@ -30,24 +30,23 @@ end
 
 files = RailsBestPractices::analyze_files(ARGV, options)
 
-runner = SapnaBestPractices::Core::Runners::Runner.new(:single)
-runner.set_debug if options['debug']
-files.each { |file| runner.check_file(file) }
+runners = [
+  SapnaBestPractices::Core::Runners::Runner.new(:single),
+  SapnaBestPractices::Core::Runners::GroupedRunner.new(:grouped),
+  SapnaBestPractices::Core::Runners::FileParseRunner.new(:file_parse)
+]
 
-grouped_runner = SapnaBestPractices::Core::Runners::GroupedRunner.new(:grouped)
-grouped_runner.set_debug if options['debug']
-grouped_runner.check_files(files)
+runners.each { |runner| 
+  runner.set_debug if options['debug'] 
+  runner.run(files)
+}
 
-file_parse_runner = SapnaBestPractices::Core::Runners::FileParseRunner.new(:file_parse)
-file_parse_runner.set_debug if options['debug']
-# file_parse_runner.check_files(files)
+errors_size = infos_size = 0
+runners.map { |runner| 
+  errors_size += runner.errors.size 
+  infos_size += runner.infos.size 
+}
+puts "\nFound #{errors_size} error messages" if errors_size > 0
+puts "Found #{infos_size} information messages" if infos_size > 0
 
-runner.errors.each          { |error|  puts "ERROR: #{error}" }
-grouped_runner.errors.each  { |error|  puts "ERROR: #{error}" }
-runner.infos.each           { |info|    puts  "INFO: #{info}" }
-#puts "\nPlease go to http://rails-bestpractices.com to see more useful Rails Best Practices."
-
-puts "\nFound #{runner.errors.size + grouped_runner.errors.size} errors." if (runner.errors.size > 0) or (grouped_runner.errors.size > 0)
-puts "Found #{runner.infos.size} information messages." if runner.infos.size > 0
-
-exit runner.errors.size
+exit errors_size

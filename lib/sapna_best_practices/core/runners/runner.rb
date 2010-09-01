@@ -55,9 +55,24 @@ module SapnaBestPractices
           end
           node = parse(filename, content)
         end
+        
+        def run(files)
+          files.each { |file| self.check_file(file) }
+          display_error_messages
+          display_info_messages
+        end
+        
       
       private 
       
+        def display_error_messages
+          self.errors.each  { |error| puts "ERROR: #{error}" }
+        end
+      
+        def display_info_messages
+          self.infos.each { |info| puts  "INFO: #{info}" }
+        end
+
         def load_checks(yaml_prefix)
           check_objects = []
           checks = YAML.load_file @config          

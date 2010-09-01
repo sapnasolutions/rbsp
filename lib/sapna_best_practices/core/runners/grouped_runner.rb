@@ -5,10 +5,6 @@ module SapnaBestPractices
     module Runners
       class GroupedRunner < SapnaBestPractices::Core::Runners::Runner
 
-        # for every check
-        # a) only select the files we're interested in
-        # b) cummulative check on group files from a)
-        # c) add error when cummulative check from b) has failed
         def check_files(files)
           @checks.each do |check|
             checker = RailsBestPractices::Core::CheckingVisitor.new([check])
@@ -29,6 +25,10 @@ module SapnaBestPractices
           else
             check.add_error check.error_message, "", "" unless check.return_value
           end
+        end
+        
+        def run(files)
+          self.check_files(files)          
         end
       
       private
