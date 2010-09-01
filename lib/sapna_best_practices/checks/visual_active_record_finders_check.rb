@@ -4,11 +4,6 @@ module SapnaBestPractices
   module Checks
     class VisualActiveRecordFindersCheck < SapnaBestPractices::Checks::Check
       
-      FINDER_METHOD_REG_EXPS = [
-        "find", "first", "last", "all", "find_by_(.*)",
-        "(.*)_sql", "(.*)sql(.*)", "execute"
-      ]        
-      
       def interesting_nodes
         [:call]
       end
@@ -18,7 +13,7 @@ module SapnaBestPractices
       end
       
       def evaluate_start(node)
-        add_info "visually check module method '.#{node.message}'", node.file, node.subject.line if finder_method?(node)
+        add_info "visually check model AR method '.#{node.message}'", node.file, node.subject.line if finder_method?(node)
       end
       
     private
