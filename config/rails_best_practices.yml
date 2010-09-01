@@ -1,7 +1,0 @@
-#AlwaysAddDbIndexCheck: { }
-
-CrossSiteRequestForgeryCheck: { }
-MassAssignmentCheck: { }
-FilterParameterLoggingCheck: { }
-
-SessionFixationCheck: { }
