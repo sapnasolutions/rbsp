@@ -8,6 +8,7 @@ module SapnaBestPractices
       VIEW_AND_CONTROLLER_FILES = /[_controller\.rb$|views\/.*\.(erb|haml)]/
       ALL_CONTROLLER_FILES = /_controller\.rb$|application.rb$/
       ALL_BUT_VIEW_FILES = /[^views\/.*\.(erb|haml)]/
+      ALL_CONTROLLER_AND_HELPER_FILES = /[_controller\.rb$|views\/.*\.(erb|haml)|\/helpers\/(.*).rb]/
       
       FINDER_METHOD_REG_EXPS = [
         "find", "first", "last", "all", "find_by_(.*)",

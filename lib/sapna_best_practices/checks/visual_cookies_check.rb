@@ -5,16 +5,20 @@ module SapnaBestPractices
     class VisualCookiesCheck < SapnaBestPractices::Checks::Check
       
       def interesting_nodes
-        [:class]
+        [:class, :module]
       end
       
       def interesting_files
-        ALL_CONTROLLER_FILES
+        ALL_CONTROLLER_AND_HELPER_FILES
       end
       
       def evaluate_start(node)
         add_info "visually check getting and setting cookies (sensitive information?)" if cookies?(node)
       end
+      def evaluate_start_module(node)
+        add_info "visually check getting and setting cookies (sensitive information?)" if cookies?(node)
+      end
+      def evaluate_end_module(node);end
       
     private
       def cookies?(node)
