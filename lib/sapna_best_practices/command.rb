@@ -29,11 +29,12 @@ OptionParser.new do |opts|
 end
 
 files = RailsBestPractices::analyze_files(ARGV, options)
-
 runners = [
   SapnaBestPractices::Core::Runners::Runner.new(:single),
   SapnaBestPractices::Core::Runners::GroupedRunner.new(:grouped),
-  SapnaBestPractices::Core::Runners::FileParseRunner.new(:file_parse)
+  # we push ARGV to FPR (and on to the FPSVisitor class) for the Erb scripting attack check
+  # it's dirty, I know!  
+  (fpr = SapnaBestPractices::Core::Runners::FileParseRunner.new(:file_parse); fpr.push_base_dir(ARGV.first); fpr)
 ]
 
 runners.each { |runner| 
