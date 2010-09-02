@@ -8,7 +8,6 @@ describe SapnaBestPractices::Checks::AttrProtectedCheck do
   it "should warn of attr_protected" do
     content = <<-EOF
     class Foo < ActiveRecord::Base
-      has_one :olaf
       attr_protected :bar
     end
     EOF
@@ -18,7 +17,6 @@ describe SapnaBestPractices::Checks::AttrProtectedCheck do
   it "should not warn of attr_protected" do
     content = <<-EOF
     class Foo < ActiveRecord::Base
-      has_one :bar
     end
     EOF
     run_and_check_for_no_error(@runner, "app/models/foo.rb", content)
