@@ -21,22 +21,44 @@ module SapnaBestPractices
         end
         
         def check(file)
-          content_has_tags?(file)
+          content_has_tags?(file, get_lines(file))
+        end
+        
+        def test_check(file, lines)
+          content_has_tags?(file, lines)
         end
         
       private
       
-        def content_has_tags?(file)
-          line_count = 0
+        def get_lines(file)
+          lines = []
           File.open(file, "r") do |f|
             while (line = f.gets)
-              line_count = line_count + 1
-              self.interesting_tags.each do |tag_regexp|
-                add_info(error_message, file, line_count) if ((line =~ tag_regexp) >= 0)
-              end
+              lines << line
             end
           end
+          return lines
         end
+      
+        def content_has_tags?(filename, lines)
+          lines.each_with_index do |line, idx|
+            self.interesting_tags.each do |tag_regexp|
+              add_info(error_message, filename, idx+1) if ((line =~ tag_regexp) >= 0)
+            end
+          end          
+        end
+
+        # def content_has_tags?(file)
+        #   line_count = 0
+        #   File.open(file, "r") do |f|
+        #     while (line = f.gets)
+        #       line_count = line_count + 1
+        #       self.interesting_tags.each do |tag_regexp|
+        #         add_info(error_message, file, line_count) if ((line =~ tag_regexp) >= 0)
+        #       end
+        #     end
+        #   end
+        # end
             
       end
     end

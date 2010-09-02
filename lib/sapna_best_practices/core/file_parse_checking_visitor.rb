@@ -12,6 +12,14 @@ module SapnaBestPractices
   	      end
   	    end
     	end
+    	
+    	def test_check(filename, lines)
+    	  @checks.each do |check|
+    	    if filename =~ check.interesting_files
+    	      check.test_check(filename, lines)
+  	      end
+  	    end
+  	  end
     end
   end
 end

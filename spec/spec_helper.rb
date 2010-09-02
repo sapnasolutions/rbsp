@@ -13,6 +13,10 @@ def init_grouped_runner(check)
   SapnaBestPractices::Core::Runners::GroupedRunner.new(:grouped, check)
 end
 
+def init_file_parse_runner(check)
+  SapnaBestPractices::Core::Runners::FileParseRunner.new(:file_parse, check)
+end
+
 
 def run_and_check_for_error(runner, filename, content, message_prefix)
   runner.check(filename, content)  
@@ -46,4 +50,16 @@ end
 def run_grouped_and_check_for_no_error(runner, file_hash)
   runner.check_files(file_hash)
   runner.errors.should be_empty
+end
+
+
+def run_file_parse_and_check_for_info(runner, filename, content, message_prefix)
+  runner.test_check_file(filename, content.split("\n"))
+  (infos = runner.infos).should_not be_empty
+  infos[0].to_s.should == "#{filename}#{message_prefix}"
+end
+
+def run_file_parse_and_check_for_no_info(runner, filename, content)
+  runner.test_check_file(filename, content)
+  runner.infos.should be_empty
 end
