@@ -12,7 +12,7 @@ module SapnaBestPractices
       end
       
       def interesting_files
-        /[^views\/.*\.(erb|haml)]/
+        ALL_BUT_VIEW_FILES
       end
       
       def evaluate_start(node)

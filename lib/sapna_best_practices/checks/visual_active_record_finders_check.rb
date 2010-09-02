@@ -9,7 +9,8 @@ module SapnaBestPractices
       end
       
       def interesting_files
-        VIEW_AND_CONTROLLER_FILES
+        # VIEW_AND_CONTROLLER_FILES
+        ALL_BUT_VIEW_FILES
       end
       
       def evaluate_start(node)
