@@ -5,11 +5,22 @@ describe SapnaBestPractices::Checks::VisualCookiesCheck do
     @runner = init_single_runner(SapnaBestPractices::Checks::VisualCookiesCheck.new)
   end
   
-  it "should warn of cookies in application controller" do
+  it "should warn of setting cookies in application controller" do
     content = <<-EOF
     class ApplicationController < ActionController::Base
       def bar
         cookies[:olaf] = :polaf
+      end
+    end
+    EOF
+    run_and_check_for_info(@runner, "app/controllers/application.rb", content, ":1 - visually check getting and setting cookies (sensitive information?)")
+  end
+
+  it "should warn of getting cookies in application controller" do
+    content = <<-EOF
+    class ApplicationController < ActionController::Base
+      def bar
+        return cookies[:olaf] + 1
       end
     end
     EOF
@@ -25,11 +36,22 @@ describe SapnaBestPractices::Checks::VisualCookiesCheck do
   end
 
 
-  it "should warn of cookies in any other controller" do
+  it "should warn of setting cookies in any other controller" do
     content = <<-EOF
     class FooController < ApplicationController
       def bar
         cookies[:olaf] = :polaf
+      end
+    end
+    EOF
+    run_and_check_for_info(@runner, "app/controllers/foo_controller.rb", content, ":1 - visually check getting and setting cookies (sensitive information?)")
+  end
+
+  it "should warn of getting cookies in any other controller" do
+    content = <<-EOF
+    class FooController < ApplicationController
+      def bar
+        return cookies[:olaf] + 1
       end
     end
     EOF
@@ -45,11 +67,22 @@ describe SapnaBestPractices::Checks::VisualCookiesCheck do
   end
 
 
-  it "should warn of cookies in helpers" do
+  it "should warn of setting cookies in helpers" do
     content = <<-EOF
     module FooHelper
       def bar
         cookies[:olaf] = :polaf
+      end
+    end
+    EOF
+    run_and_check_for_info(@runner, "app/helpers/foo_helper.rb", content, ":1 - visually check getting and setting cookies (sensitive information?)")
+  end
+
+  it "should warn of getting cookies in helpers" do
+    content = <<-EOF
+    module FooHelper
+      def bar
+        return cookies[:olaf] + 1
       end
     end
     EOF
