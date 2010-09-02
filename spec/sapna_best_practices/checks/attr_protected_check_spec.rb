@@ -12,10 +12,7 @@ describe SapnaBestPractices::Checks::AttrProtectedCheck do
       attr_protected :bar
     end
     EOF
-    @runner.check('app/models/foo.rb', content)
-    errors = @runner.errors
-    errors.should_not be_empty
-    errors[0].to_s.should == "app/models/foo.rb:1 - attr_protected is not advisable"
+    run_and_check_for_error(@runner, "app/models/foo.rb", content, ":1 - attr_protected is not advisable")
   end
   
   it "should not warn of attr_protected" do
@@ -24,9 +21,7 @@ describe SapnaBestPractices::Checks::AttrProtectedCheck do
       has_one :bar
     end
     EOF
-    @runner.check('app/models/foo.rb', content)
-    errors = @runner.errors
-    errors.should be_empty
+    run_and_check_for_no_error(@runner, "app/models/foo.rb", content)
   end
   
 end

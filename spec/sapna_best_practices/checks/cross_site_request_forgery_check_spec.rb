@@ -10,10 +10,7 @@ describe SapnaBestPractices::Checks::CrossSiteRequestForgeryCheck do
     class ApplicationController < ActionController::Base
     end
     EOF
-    @runner.check('app/controllers/application.rb', content)
-    errors = @runner.errors
-    errors.should_not be_empty
-    errors[0].to_s.should == "app/controllers/application.rb:1 - cross site request forgery (CSRF)"
+    run_and_check_for_error(@runner, "app/controllers/application.rb", content, ":1 - cross site request forgery (CSRF)")
   end
   
   it "should not warn of CSRF in application controller" do
@@ -22,9 +19,7 @@ describe SapnaBestPractices::Checks::CrossSiteRequestForgeryCheck do
       protect_from_forgery
     end
     EOF
-    @runner.check('app/controllers/application.rb', content)
-    errors = @runner.errors
-    errors.should be_empty
+    run_and_check_for_no_error(@runner, "app/controllers/application.rb", content)
   end
   
   it "should warn of CSRF in any other controller" do
@@ -33,10 +28,7 @@ describe SapnaBestPractices::Checks::CrossSiteRequestForgeryCheck do
       skip_before_filter :verify_authenticity_token
     end
     EOF
-    @runner.check('app/controllers/foo_controller.rb', content)
-    errors = @runner.errors
-    errors.should_not be_empty
-    errors[0].to_s.should == "app/controllers/foo_controller.rb:1 - cross site request forgery (CSRF)"
+    run_and_check_for_error(@runner, "app/controllers/foo_controller.rb", content, ":1 - cross site request forgery (CSRF)")
   end
 
   it "should not warn of CSRF in any other controller" do
@@ -44,9 +36,7 @@ describe SapnaBestPractices::Checks::CrossSiteRequestForgeryCheck do
     class FooController < ActionController::Base
     end
     EOF
-    @runner.check('app/controllers/foo_controller.rb', content)
-    errors = @runner.errors
-    errors.should be_empty
+    run_and_check_for_no_error(@runner, "app/controllers/foo_controller.rb", content)
   end
   
 end
