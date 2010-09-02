@@ -2,7 +2,7 @@ require File.join(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe SapnaBestPractices::Checks::EvalCheck do
   before(:each) do
-    @runner = SapnaBestPractices::Core::Runners::Runner.new(:single, SapnaBestPractices::Checks::EvalCheck.new)
+    @runner = init_single_runner(SapnaBestPractices::Checks::EvalCheck.new)
   end
   
   it "should warn of eval in helpers" do

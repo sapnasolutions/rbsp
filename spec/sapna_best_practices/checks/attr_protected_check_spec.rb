@@ -2,7 +2,7 @@ require File.join(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe SapnaBestPractices::Checks::AttrProtectedCheck do
   before(:each) do
-    @runner = SapnaBestPractices::Core::Runners::Runner.new(:single, SapnaBestPractices::Checks::AttrProtectedCheck.new)
+    @runner = init_single_runner(SapnaBestPractices::Checks::AttrProtectedCheck.new)
   end
   
   it "should warn of attr_protected" do

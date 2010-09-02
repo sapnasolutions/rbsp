@@ -2,7 +2,7 @@ require File.join(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe SapnaBestPractices::Checks::CrossSiteRequestForgeryCheck do
   before(:each) do
-    @runner = SapnaBestPractices::Core::Runners::Runner.new(:single, SapnaBestPractices::Checks::CrossSiteRequestForgeryCheck.new)
+    @runner = init_single_runner(SapnaBestPractices::Checks::CrossSiteRequestForgeryCheck.new)
   end
   
   it "should warn of CSRF in application controller" do
