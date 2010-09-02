@@ -9,6 +9,11 @@ def init_single_runner(check)
   SapnaBestPractices::Core::Runners::Runner.new(:single, check)
 end
 
+def init_grouped_runner(check)
+  SapnaBestPractices::Core::Runners::GroupedRunner.new(:grouped, check)
+end
+
+
 def run_and_check_for_error(runner, filename, content, message_prefix)
   runner.check(filename, content)  
   (errors = runner.errors).should_not be_empty
@@ -29,4 +34,16 @@ end
 def run_and_check_for_no_info(runner, filename, content)
   runner.check(filename, content)
   runner.infos.should be_empty
+end
+
+
+def run_grouped_and_check_for_error(runner, file_hash, message)
+  runner.check_files(file_hash)
+  (errors = runner.errors).should_not be_empty
+  errors[0].to_s.should == message
+end
+
+def run_grouped_and_check_for_no_error(runner, file_hash)
+  runner.check_files(file_hash)
+  runner.errors.should be_empty
 end
