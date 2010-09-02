@@ -5,13 +5,14 @@ module SapnaBestPractices
     module Runners
       class GroupedRunner < SapnaBestPractices::Core::Runners::Runner
 
-        def check_files(files)
+        def check_files(file_hashes)          
           @checks.each do |check|
             checker = RailsBestPractices::Core::CheckingVisitor.new([check])
 
-            filtered_files = filter_files(files, check.interesting_files)          
-            filtered_files.each do |filtered_file|
-              node = get_node(filtered_file, File.read(filtered_file))
+            filtered_file_hashes = filter_files(file_hashes, check.interesting_files)          
+
+            filtered_file_hashes.each do |filtered_file_hash|
+              node = get_node(filtered_file_hash[:filename], filtered_file_hash[:content])
               node.accept(checker) if node
             end
 
@@ -28,13 +29,20 @@ module SapnaBestPractices
         end
         
         def run(files)
-          self.check_files(files)          
+          self.check_files(read_in_files(files))          
+          display_error_messages
+          display_info_messages
         end
       
       private
+      
+        def read_in_files(files)
+          return files.map{|x| { :filename => x, :content => File.read(x) } }
+        end
     
-        def filter_files(files, filter_regexp)
-          return files.select{|x| x =~ filter_regexp }        
+        def filter_files(file_hashes, filter_regexp)
+          # return files.select{|x| x =~ filter_regexp }        
+          return file_hashes.select{ |x| x[:filename] =~ filter_regexp }
         end
       
       end
