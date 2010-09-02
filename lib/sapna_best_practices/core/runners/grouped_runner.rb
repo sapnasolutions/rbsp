@@ -41,7 +41,6 @@ module SapnaBestPractices
         end
     
         def filter_files(file_hashes, filter_regexp)
-          # return files.select{|x| x =~ filter_regexp }        
           return file_hashes.select{ |x| x[:filename] =~ filter_regexp }
         end
       
