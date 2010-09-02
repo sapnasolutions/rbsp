@@ -3,7 +3,7 @@ require File.join(File.dirname(__FILE__) + '/../../../spec_helper')
 describe SapnaBestPractices::Checks::Grouped::ForgeryProtectionInTestCheck do
   before(:each) do    
     @runner = init_grouped_runner(SapnaBestPractices::Checks::Grouped::ForgeryProtectionInTestCheck.new)
-    @runner.inversed = true
+    @runner.inversed = true # IMPORTANT!!!
   end
   
   it "should warn of disabled forgery protection outside of test environment: development environment" do
