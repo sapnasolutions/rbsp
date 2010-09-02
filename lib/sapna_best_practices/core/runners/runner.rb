@@ -57,7 +57,6 @@ module SapnaBestPractices
         end
         
         def run(files)
-# files.each{|f|puts f}          
           files.each { |file| self.check_file(file) }
           display_error_messages
           display_info_messages
